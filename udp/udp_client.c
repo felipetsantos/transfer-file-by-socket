@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
 	struct in_addr ipv4addr;
 	socklen_t	lenServer;
 	char * contentFile;
-	char * mac;
 
 	if	(argc!=3)  {
 		fprintf(stderr,"Uso:\n%s <ip> <caminho do arquivo>\n\n",argv[0]);
