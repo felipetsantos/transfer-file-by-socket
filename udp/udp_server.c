@@ -8,6 +8,7 @@
 #include "../file.c"
 
 #define FILE_SIZE 1500
+#define PORT   0x8007
 
 int main(int argc, char *argv[])
 {
@@ -28,7 +29,7 @@ int main(int argc, char *argv[])
 
 	addressServer.sin_family = AF_INET;
 	addressServer.sin_addr.s_addr = INADDR_ANY;
-	addressServer.sin_port = htons(32128);
+	addressServer.sin_port = htons(PORT);
 
 	if	(bind(socketServer,(struct sockaddr *)&addressServer,lenServer) < 0)  {
 		fprintf(stderr,"%s: erro em bind(): %s\n",argv[0],strerror(errno));

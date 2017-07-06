@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <netdb.h>
 #include "../file.c"
+#define PORT   0x8007
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
 	struct in_addr ipv4addr;
 	socklen_t	lenServer;
 	char * contentFile;
+	char * mac;
 
 	if	(argc!=3)  {
 		fprintf(stderr,"Uso:\n%s <ip> <caminho do arquivo>\n\n",argv[0]);
@@ -38,12 +40,10 @@ int main(int argc, char *argv[])
 	lenServer = sizeof(addressServer);
 
 	/*Limpa memória*/
-	memset((char *)&addressServer,0,lenServer);
-
+	bzero((char *)&addressServer, lenServer);
 	addressServer.sin_family = AF_INET;
-
-	memcpy(&hostinfo->h_addr, &addressServer.sin_addr.s_addr, hostinfo->h_length);
-	addressServer.sin_port = htons(32128);
+	bcopy((char *)hostinfo->h_addr,(char *)&addressServer.sin_addr.s_addr,hostinfo->h_length);
+	addressServer.sin_port = htons(PORT);
 	
 	/* inicializa client socket */
 	socketClient = socket(AF_INET, SOCK_DGRAM, 0);
