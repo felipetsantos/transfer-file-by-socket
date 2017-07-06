@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
 	while	(1) {
 		buffer = malloc(FILE_SIZE);
 		n = recvfrom(socketServer,buffer, FILE_SIZE , 0 ,(struct sockaddr *)&addressClient, &lenClient);
+		printf("Recebeu um arquivo.\n");
 		if	(n < 0)  {
 			fprintf(stderr,"%s: erro em recvfrom(): %s\n",argv[0],strerror(errno));
 			exit(1);

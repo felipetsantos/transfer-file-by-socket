@@ -47,8 +47,9 @@ int main(int argc, char *argv[])
 	
 	/* inicializa client socket */
 	socketClient = socket(AF_INET, SOCK_DGRAM, 0);
-
+	printf("Vai enviar o arquivo....\n");
 	n = sendto (socketClient, contentFile , sizeContent, 0, (struct sockaddr *)&addressServer, lenServer);
+	printf("Enviou o arquivo.\n");
 	if	(n < 0)  {
 		fprintf(stderr,"%s: erro no sendto: %s\n",argv[0],strerror(errno));
 		exit(1);
