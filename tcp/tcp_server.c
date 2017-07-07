@@ -9,7 +9,6 @@
 #include "../file.c"
 
 #define PORT   0x8006
-#define FILE_SIZE 1500
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +17,15 @@ int main(int argc, char *argv[])
 	int			svc_socket,clnt_socket;
 	socklen_t		clnt_len,svc_len;
 	char *buffer;
+	int fileSize;
+
+
+	if	(argc!=2)  {
+		fprintf(stderr,"Uso:\n%s <tamanho em bytes do arquivo que o servidor vai receber> \n\n",argv[0]);
+		exit(1);
+	}
+
+	fileSize = atoi(argv[1]);
 
 	svc_socket = socket(AF_INET, SOCK_STREAM, 0);
 	if	(svc_socket < 0)  {
@@ -47,11 +55,11 @@ int main(int argc, char *argv[])
 			fprintf(stderr,"%s: erro em accept(): %s\n",argv[0],strerror(errno));
 			exit(1);
 		}
-		buffer = malloc(FILE_SIZE);
+		buffer = malloc(fileSize);
 		/* le a informação que o cliente mandou */
-		read(clnt_socket, buffer, FILE_SIZE);
+		read(clnt_socket, buffer, fileSize);
 		printf("Recebeu um arquivo.\n");
-		saveFile("out.txt", buffer, FILE_SIZE);
+		saveFile("out.txt", buffer, fileSize);
 		close(clnt_socket);
 	}
 	return 0;

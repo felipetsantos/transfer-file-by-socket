@@ -7,7 +7,6 @@
 #include <netinet/in.h>
 #include "../file.c"
 
-#define FILE_SIZE 1500
 #define PORT   0x8007
 
 int main(int argc, char *argv[])
@@ -17,6 +16,15 @@ int main(int argc, char *argv[])
 	int	socketServer, n;
 	socklen_t lenClient,lenServer;
 	char *buffer;
+	int fileSize;
+
+
+	if	(argc!=2)  {
+		fprintf(stderr,"Uso:\n%s <tamanho em bytes do arquivo que o servidor vai receber> \n\n",argv[0]);
+		exit(1);
+	}
+
+	fileSize = atoi(argv[1]);
 
 	socketServer = socket(AF_INET, SOCK_DGRAM, 0);
 	if	(socketServer < 0)  {
@@ -38,14 +46,14 @@ int main(int argc, char *argv[])
 
 	lenClient = sizeof(addressClient);
 	while	(1) {
-		buffer = malloc(FILE_SIZE);
-		n = recvfrom(socketServer, buffer, FILE_SIZE , 0 ,(struct sockaddr *)&addressClient, &lenClient);
+		buffer = malloc(fileSize);
+		n = recvfrom(socketServer, buffer, fileSize , 0 ,(struct sockaddr *)&addressClient, &lenClient);
 		printf("Recebeu um arquivo.\n");
 		if	(n < 0)  {
 			fprintf(stderr,"%s: erro em recvfrom(): %s\n",argv[0],strerror(errno));
 			exit(1);
 		}
-		saveFile("out.txt", buffer, FILE_SIZE);
+		saveFile("out.txt", buffer, fileSize);
  	}
 	return 0;
 }
