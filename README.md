@@ -43,7 +43,7 @@ Atráves do netem foi realizada a seguinte configuração:
 
 Isso significa que vai simular a perda de 50% dos pacotes enviados.
 
-No udp, foi necessário realizar diversas tentativas para conseguir transferir o arquivo. Já no TCP, o próprio protocolo fez as restramissões dos pacotes que foram pedidos. 
+No udp, foi necessário realizar diversas tentativas para conseguir transferir o arquivo. Já no TCP, o próprio protocolo fez as restramissões dos pacotes que foram perdidos. 
 
 - Aplicação TCP arquivo de 800 bytes:
 Foram necessários a troca de 14 pacotes para completar a transmissão do arquivo. Nesse caso houve a retrasmissão de diversos pacotes.
@@ -53,8 +53,10 @@ Foram necessários a troca de 11 pacotes para completar a transmissão do arquiv
 
 ### 2.2
 
-TODO
+Atráves do netem foi realizada a configuração abaixo:
 
-#### comandos utilziados
-# tc qdisc del dev enp3s0 root
-# tc -s qdisc ls dev enp3s0
+``sudo tc qdisc add dev enp3s0 root netem delay 2000ms 1500ms``
+
+Essa configuração faz com que a latencia de envio varie entre 2000 milisegundo e 1500 milisegundos.
+
+Na trasnmissão via socket tcp houve retrasmissão de pacotes, já com socket UDP continuou como nas execuções do exercício 1.
