@@ -9,9 +9,12 @@ No arquivo udp/udp_client.c está a implementação do cliente UDP responsável 
 
 ## Como executar:
 
-Os clientes recebem por parâmetro <ip do servidor> <arquivo texto a ser enviado>. 
+Na hora de executar os clientes é preciso informar por parâmetro o "ip do servidor" e o "caminho do arquivo texto a ser enviado". 
+
 Exemplo de execução: `` sudo ./tcp_client 192.168.1.1 ../800bytes.txt`` 
-Os servidores recebem por parâmetro o <tamanho em bytes do arquivo que o servidor vai receber>. 
+
+Na hora de executar os servidores é necessário passar por parâmetro o "tamanho em bytes do arquivo que o servidor vai receber". 
+
 Exemplo de execução: `` sudo ./tcp_server 800`` 
 
 
