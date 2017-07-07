@@ -21,7 +21,7 @@ Exemplo de execução: `` sudo ./tcp_server 800``
 ## Testes
 Para os testes foram utilzados dois arquivos texto, um de 800 bytes (800bytes.txt) e outro de 2000 bytes (2000bytes.txt) que se encontram na raiz do projeto.
 
-### Resposta execicio 1 
+### Resposta execício 1 
 - Aplicação UDP arquivo de 800 bytes: 
 Enviado apenas um pacote UDP com os dados do texto. 
 - Aplicação TCP arquivo de 800 bytes:
