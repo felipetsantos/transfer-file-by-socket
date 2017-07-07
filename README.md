@@ -35,3 +35,26 @@ Foram trocadas 7 mensagens TCP no total. Cliente enviou um pacote TCP SYN de 74 
 o cliente enviou três novos pacotes TCP ACK de 66 bytes, TCP ACK um parte dos dados(1448 bytes de dados mais 66 bytes de overload) e um TCP FIN+PSH+ACK o restante(553 bytes de dados mais 66 bytes de overload)
 
 ### Resposta execício 2
+
+### 2.1
+Atráves do netem foi realizada a seguinte configuração:
+
+``tc qdisc add dev enp3s0 root netem loss 50%``
+
+Isso significa que vai simular a perda de 50% dos pacotes enviados.
+
+No udp, foi necessário realizar diversas tentativas para conseguir transferir o arquivo. Já no TCP, o próprio protocolo fez as restramissões dos pacotes que foram pedidos. 
+
+- Aplicação TCP arquivo de 800 bytes:
+Foram necessários a troca de 14 pacotes para completar a transmissão do arquivo. Nesse caso houve a retrasmissão de diversos pacotes.
+
+- Aplicação TCP arquivo de 2000 bytes:
+Foram necessários a troca de 11 pacotes para completar a transmissão do arquivo. Também houve retransmissão de pacotes.
+
+### 2.2
+
+TODO
+
+#### comandos utilziados
+# tc qdisc del dev enp3s0 root
+# tc -s qdisc ls dev enp3s0
